@@ -47,24 +47,7 @@ class Voids:
         today = datetime.today()
         stat_date = stat_date + ' ' + str(today.year)
         stat_date = translator.translate(stat_date)
-        try:
-            stat_date = datetime.strptime(
-                stat_date, '%d %B %Y').strftime('%d.%m.%Y')
-        except ValueError:
-            try:
-                stat_date = datetime.strptime(
-                    stat_date, '%B %d, %Y').strftime('%d.%m.%Y')
-            except ValueError:
-                try:
-                    stat_date = datetime.strptime(
-                        stat_date, '%d-%b-%Y').strftime('%d.%m.%Y')
-                except ValueError:
-                    try:
-                        stat_date = datetime.strptime(
-                            stat_date, '%d %B').strftime('%d.%m')
-                        stat_date += '.'+str(datetime.now().year)
-                    except ValueError:
-                        stat_date = parse(stat_date).strftime('%d.%m.%Y')
+        stat_date = parse(stat_date).strftime('%d.%m.%Y')
         return stat_date, time
 
     def analysis(self, new_data, data):
